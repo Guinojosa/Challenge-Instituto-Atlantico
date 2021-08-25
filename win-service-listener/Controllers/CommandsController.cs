@@ -60,22 +60,24 @@ namespace win_service_listener.Controllers
                 using (var ps = PowerShell.Create())
                 {
                     var resultName = ps.AddScript("hostname  | Out-String").Invoke();
-                    result += $"Machine Name: \r {resultName[0].ToString()} \n";
+                    result += $"Machine Name: {resultName[0].ToString()} \n";
                     var resultIp = ps.AddScript("ipconfig | findstr /i \"ipv4\"  | Out-String").Invoke();
                     result += $"Address IPV4: \r\n {resultIp[0].ToString()}\n";
                     var resultStatusFireWall = ps.AddScript("netsh advfirewall show currentprofile state  | Out-String").Invoke();
                     result += $"Firewall Status: \r\n {resultStatusFireWall[0].ToString()}";
+                    var resultVersionSistem = ps.AddScript("(Get-ItemProperty -Path c:\\windows\\system32\\hal.dll).VersionInfo.FileVersion | Out-String").Invoke();
+                    result += $"Version Windows: {resultVersionSistem[0].ToString()} \n";
                     var resultAntiVirus = ps.AddScript("Get-CimInstance -Namespace root/SecurityCenter2 -ClassName AntivirusProduct | Select displayName | Out-String").Invoke();
                     result += $"AntiVirus Installed: \r\n {resultAntiVirus[0].ToString()}";
                     var resultDotnetVersion = ps.AddScript("dotnet --version | Out-String").Invoke();
-                    result += $"Dotnet Version: \r\n {resultDotnetVersion[0].ToString()}\n";
+                    result += $"Dotnet Version: {resultDotnetVersion[0].ToString()}\n";
                     var resultHdState = ps.AddScript("Get-PSDrive | Select-Object Name, @{ E={\"$([math]::round($_.Used/1GB,2))\"}; L='Used' }, @{ E={\"$([math]::round($_.Free/1GB,2))\"}; L='Free' } | where {($_.Used -notlike 0)} | Out-String").Invoke();
                     result += $"Size of HDD's (GB): \r\n {resultHdState[0].ToString()}";
                     var resultPath = ps.AddScript("Get-Location").Invoke();
-                    currentPath += resultPath[0].ToString();
+                    currentPath = resultPath[0].ToString();
                 }
-                return result;
-                // return new { value_init = result, path = currentPath };
+                // return result;
+                return new { value_init = result, path = currentPath };
             }
             catch (Exception ex)
             {
