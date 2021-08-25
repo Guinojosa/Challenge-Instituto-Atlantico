@@ -51,15 +51,15 @@
             },
             "Microsoft.PowerShell.Commands.Diagnostics": {
               "target": "Package",
-              "version": "[6.0.1, )"
+              "version": "[7.1.1, )"
             },
             "Microsoft.PowerShell.SDK": {
               "target": "Package",
-              "version": "[6.0.1, )"
+              "version": "[7.1.1, )"
             },
             "Microsoft.WSMan.Management": {
               "target": "Package",
-              "version": "[6.0.1, )"
+              "version": "[7.1.1, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
