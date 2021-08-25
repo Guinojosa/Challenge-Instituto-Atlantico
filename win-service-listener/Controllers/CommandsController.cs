@@ -23,7 +23,7 @@ namespace win_service_listener.Controllers
         }
 
         [HttpGet, Route("GetCommandByPath")]
-        public string GetCommandByPath(string path, string command)
+        public dynamic GetCommandByPath(string path, string command)
         {
             try
             {
@@ -39,14 +39,14 @@ namespace win_service_listener.Controllers
                         var resultPath = ps.AddScript("Get-Location").Invoke();
                         result = resultPath[0].ToString();
                     }
-                    else if (results.Count == 0) throw new Exception("Command not process.");
+                    else if (results.Count == 0) throw new Exception("");
                     else result = results[0].ToString();
                 }
-                return result;
+                return new {result = result};
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                return new {error = ex.Message};
             }
         }
 

@@ -28,6 +28,12 @@ namespace win_service_listener
         {
 
             services.AddControllers();
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    }));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "win_service_listener", Version = "v1" });
@@ -43,6 +49,8 @@ namespace win_service_listener
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "win_service_listener v1"));
             }
+
+            app.UseCors("MyPolicy");
 
             app.UseHttpsRedirection();
 
