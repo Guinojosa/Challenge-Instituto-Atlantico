@@ -1,0 +1,13 @@
+<div class="navbar">
+  <a href="javascript:void(0)" class="active">New Machine</a>
+  <!-- <a href="#news">Command</a>
+  <a href="#contact">Ex</a> -->
+</div>
+<div style="max-height: 94vh;overflow: auto;">
+  <ng-container *ngFor="let ip of ips;let i = index">
+    <div style="min-height: 45vh;max-height: 45vh;overflow: auto;background: #000" #divScroll>
+      <win-console [ip]="ip" [divScroll]="divScroll" [index]="i"></win-console>
+    </div>
+    <hr>
+  </ng-container>
+</div>
