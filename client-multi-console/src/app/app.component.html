@@ -1,12 +1,40 @@
-<div class="navbar-console">
-  <a href="javascript:void(0)" class="active">New Machine</a>
-  <!-- <a href="#news">Command</a>
-  <a href="#contact">Ex</a> -->
-</div>
+<nav class="navbar fixed-bottom navbar-light bg-faded justify-content-between navbar-dark bg-dark flex-nowrap flex-row">
+  <div class="container">
+    <a href="/" class="navbar-brand float-left">BRS</a>
+    <ul class="nav navbar-nav flex-row">
+      <li class="nav-item active" style="margin-right: 5px;">
+        <a class="nav-link" href="#"><i class="icofont-plus"></i> Nova Maquina</a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav flex-row float-right">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-mdb-toggle="dropdown"
+          aria-expanded="false">
+          <i class="icofont-options"></i> Opções
+        </a>
+        <!-- Dropdown menu -->
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li>
+            <a class="dropdown-item" href="#">Action</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#">Another action</a>
+          </li>
+          <li>
+            <hr class="dropdown-divider" />
+          </li>
+          <li>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
 <div style="max-height: 94vh;overflow: auto;">
   <ng-container *ngFor="let ip of ips;let i = index">
     <div [ngStyle]="{'height': calcHeight()}" style="overflow: auto;background: #000" #divScroll>
-      <win-console [ip]="ip" [divScroll]="divScroll" [index]="i"></win-console>
+      <win-console [ip]="ip" [divScroll]="divScroll" [index]="i" (removeIp)="removeIp($event)"></win-console>
     </div>
     <hr>
   </ng-container>

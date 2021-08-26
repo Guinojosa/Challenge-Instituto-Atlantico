@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { WinListenerService } from 'src/app/service/win-listener.service';
 
 @Component({
@@ -10,6 +10,8 @@ export class WinConsoleComponent implements OnInit {
   @Input() ip: string;
   @Input() divScroll: any;
   @Input() index: any;
+
+  @Output() removeIp = new EventEmitter<string>();
 
   offline: boolean = false;
   loading: boolean = true;
@@ -29,13 +31,13 @@ export class WinConsoleComponent implements OnInit {
   }
 
   submit(text, userInput) {
-    this.messages.push(`${this.currentPath} ${text}`);
+    this.messages.push(`${this.currentPath}> ${text}`);
     this._service.getCommandByPath(this.ip, `"${this.currentPath}"`, text).then(x => {
       if(text.includes('cd') && x.result != null) this.currentPath = x.result;
       else if (x.result != null )this.messages.push(x.result);
       else this.messages.push(x.error);
       this.scrollToBottom();
-    }).catch(ex => {console.log(ex), this.offline = true});
+    }).catch(() => {this.offline = true});
   }
 
   connect(){
@@ -47,7 +49,11 @@ export class WinConsoleComponent implements OnInit {
       this.scrollToBottom();
       this.loading = false;
       this.offline = false; 
-    }).catch(ex => {console.log(ex), this.offline = true, this.loading = false});
+    }).catch(() => {this.offline = true, this.loading = false});
+  }
+
+  removeConsole(){
+    this.removeIp.emit(this.ip);
   }
 
   scrollToBottom() {

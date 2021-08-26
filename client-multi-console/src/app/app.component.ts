@@ -6,11 +6,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'client-multi-console';
   ips = ['localhost:5050']
 
   calcHeight(){
-    if(this.ips.length > 1) return '45vh'
-    else return '90vh'
+    if(this.ips.length > 1) return '43vh'
+    else return '89vh'
+  }
+
+  removeIp(ip){
+    this.ips = this.ips.filter(x => x != ip);
   }
 }
