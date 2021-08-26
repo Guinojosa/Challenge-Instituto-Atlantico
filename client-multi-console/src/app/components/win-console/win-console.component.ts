@@ -10,8 +10,10 @@ export class WinConsoleComponent implements OnInit {
   @Input() ip: string;
   @Input() divScroll: any;
   @Input() index: any;
-  messages = [
-  ];
+
+  offline: boolean = false;
+
+  messages = [];
   currentPath = '';
 
   constructor(private _service: WinListenerService){}
@@ -21,12 +23,10 @@ export class WinConsoleComponent implements OnInit {
       this.messages.push(x.value_init);
       this.currentPath = x.path;
       this.scrollToBottom();
-    });
-    // this.setFocus();
+    }).catch(ex => console.log(ex));
   }
 
   setFocus() {
-    // console.log(this.index)
     document.getElementById(`text-input${this.index}`).focus();
     this.scrollToBottom();
   }
@@ -38,7 +38,7 @@ export class WinConsoleComponent implements OnInit {
       else if (x.result != null )this.messages.push(x.result);
       else this.messages.push(x.error);
       this.scrollToBottom();
-    });
+    }).catch(ex => console.log(ex));
   }
 
   scrollToBottom() {

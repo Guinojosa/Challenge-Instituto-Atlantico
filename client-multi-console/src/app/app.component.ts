@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'client-multi-console';
-  ips = ['localhost:5050', 'localhost:5050','localhost:5050', 'localhost:5050']
+  ips = ['localhost:5050']
 }
