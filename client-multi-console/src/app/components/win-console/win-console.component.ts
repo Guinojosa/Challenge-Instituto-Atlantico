@@ -12,6 +12,7 @@ export class WinConsoleComponent implements OnInit {
   @Input() index: any;
 
   offline: boolean = false;
+  loading: boolean = true;
 
   messages = [];
   currentPath = '';
@@ -19,11 +20,7 @@ export class WinConsoleComponent implements OnInit {
   constructor(private _service: WinListenerService){}
 
   ngOnInit() {
-    this._service.getInit(this.ip).then(x => {
-      this.messages.push(x.value_init);
-      this.currentPath = x.path;
-      this.scrollToBottom();
-    }).catch(ex => console.log(ex));
+    this.connect();
   }
 
   setFocus() {
@@ -38,7 +35,19 @@ export class WinConsoleComponent implements OnInit {
       else if (x.result != null )this.messages.push(x.result);
       else this.messages.push(x.error);
       this.scrollToBottom();
-    }).catch(ex => console.log(ex));
+    }).catch(ex => {console.log(ex), this.offline = true});
+  }
+
+  connect(){
+    this.loading = true;
+    this.messages = [];
+    this._service.getInit(this.ip).then(x => {
+      this.messages.push(x.value_init);
+      this.currentPath = x.path;
+      this.scrollToBottom();
+      this.loading = false;
+      this.offline = false; 
+    }).catch(ex => {console.log(ex), this.offline = true, this.loading = false});
   }
 
   scrollToBottom() {

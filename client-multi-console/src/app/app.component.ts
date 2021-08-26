@@ -8,4 +8,9 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'client-multi-console';
   ips = ['localhost:5050']
+
+  calcHeight(){
+    if(this.ips.length > 1) return '45vh'
+    else return '90vh'
+  }
 }

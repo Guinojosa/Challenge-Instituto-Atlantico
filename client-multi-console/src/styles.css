@@ -5,7 +5,7 @@ body {
     height: 80vh;
   }
   
-  .navbar {
+  .navbar-console {
     overflow: hidden;
     background-color: #333;
     position: fixed;
@@ -13,7 +13,7 @@ body {
     width: 100%;
   }
   
-  .navbar a {
+  .navbar-console a {
     float: left;
     display: block;
     color: #f2f2f2;
@@ -23,12 +23,12 @@ body {
     font-size: 17px;
   }
   
-  .navbar a:hover {
+  .navbar-console a:hover {
     background: #f1f1f1;
     color: black;
   }
   
-  .navbar a.active {
+  .navbar-console a.active {
     background-color: #04AA6D;
     color: white;
   }
