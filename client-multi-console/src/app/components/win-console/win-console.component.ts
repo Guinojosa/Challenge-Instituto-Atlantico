@@ -19,7 +19,7 @@ export class WinConsoleComponent implements OnInit {
   messages: string[] = [];
   currentPath = '';
 
-  constructor(private service: WinListenerService){}
+  constructor(private service: WinListenerService) { }
 
   ngOnInit() {
     this.connect();
@@ -36,25 +36,27 @@ export class WinConsoleComponent implements OnInit {
     this.service.getCommandByPath(this.ip, `"${this.currentPath}"`, text).then(x => {
       userInput.disabled = false;
       if (text.includes('cd') && x.result != null) { this.currentPath = x.result; }
-      else if (x.result != null ) {this.messages.push(x.result); }
+      else if (x.result != null) { this.messages.push(x.result); }
       else { this.messages.push(x.error); }
       this.scrollToBottom();
+      this.setFocus();
     }).catch(() => { userInput.disabled = false, this.offline = true; });
   }
 
-  connect(){
+  connect() {
     this.loading = true;
     this.messages = [];
     this.service.getInit(this.ip).then(x => {
       this.messages.push(x.value_init);
       this.currentPath = x.path;
       this.scrollToBottom();
+      this.setToFocus();
       this.loading = false;
       this.offline = false;
-    }).catch(() => {this.offline = true, this.loading = false; });
+    }).catch(() => { this.offline = true, this.loading = false; });
   }
 
-  removeConsole(){
+  removeConsole() {
     this.removeConsoleByIndex.emit(this.index);
   }
 
@@ -62,6 +64,15 @@ export class WinConsoleComponent implements OnInit {
     setTimeout(
       () => {
         this.divScroll.scrollTop = this.divScroll.scrollHeight;
+      },
+      50
+    );
+  }
+
+  setToFocus() {
+    setTimeout(
+      () => {
+        this.setFocus();
       },
       50
     );

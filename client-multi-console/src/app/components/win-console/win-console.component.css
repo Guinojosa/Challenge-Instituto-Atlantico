@@ -1,39 +1,17 @@
-input {
-    outline: none !important;
-   }
    
    .font-monospace {
      font-family: monospace;
    }
-   
-   .height-full {
-     height: 100%;
-   }
-   
-   .text-white {
-     color: white;
-   }
-   
-   .p-t-xs {
-     padding: 0.4em;
-   }
-   
+
    .message-container {
      padding-left: 0.55em;
      font-size: .875rem;
    }
-   
-   .m-t-shift {
-     margin-top: -4px;
-   }
-   
+      
    .border-none {
      border: none;
    }
-   
-   .bg-transparent {
-     background: transparent;
-   }
+
    .form-control:focus {
     outline: none !important;
     outline-style: none;
@@ -42,26 +20,7 @@ input {
     -webkit-appearance:none;
     border-color:transparent;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  }
-
-  /* width */
-::-webkit-scrollbar {
-    width: 10px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: #f1f1f1; 
-  }
-   
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #888; 
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #555; 
+    font-size: 0.875rem;
   }
 
   .loader {
