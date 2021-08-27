@@ -11,13 +11,13 @@ export class WinConsoleComponent implements OnInit {
   @Input() divScroll: any;
   @Input() index: any;
 
-  @Output() removeIp = new EventEmitter<string>();
+  @Output() removeConsoleByIndex = new EventEmitter<string>();
 
   offline: boolean = false;
   loading: boolean = true;
 
-  messages = [];
-  currentPath = '';
+  messages: string[] = [];
+  currentPath: string = '';
 
   constructor(private _service: WinListenerService){}
 
@@ -31,14 +31,15 @@ export class WinConsoleComponent implements OnInit {
   }
 
   submit(text, userInput) {
+    userInput.disabled = true;
     this.messages.push(`${this.currentPath}> ${text}`);
     this._service.getCommandByPath(this.ip, `"${this.currentPath}"`, text).then(x => {
-      console.log(x.result);
+      userInput.disabled = false;
       if(text.includes('cd') && x.result != null) this.currentPath = x.result;
       else if (x.result != null )this.messages.push(x.result);
       else this.messages.push(x.error);
       this.scrollToBottom();
-    }).catch(() => {this.offline = true});
+    }).catch(() => { userInput.disabled = false, this.offline = true});
   }
 
   connect(){
@@ -54,7 +55,7 @@ export class WinConsoleComponent implements OnInit {
   }
 
   removeConsole(){
-    this.removeIp.emit(this.ip);
+    this.removeConsoleByIndex.emit(this.index);
   }
 
   scrollToBottom() {

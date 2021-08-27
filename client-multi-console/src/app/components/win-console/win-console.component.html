@@ -1,24 +1,34 @@
 <div class="font-monospace text-white height-full p-t-xs" (click)="setFocus()" *ngIf="!offline && !loading">
   <div class="message-container" *ngFor="let message of messages">
     <span style="white-space: break-spaces;" [innerHTML]="message | nl2b"></span>
-    <!-- <span>{{message | nl2b}}</span> -->
   </div>
   <div class="input-group input-group-sm m-t-shift">
-    <span class="input-group-text bg-transparent text-white border-none">{{currentPath}}></span>
-    <input #userInput type="text" [id]="'text-input'+ index"
-      (keyup.enter)="submit(userInput.value, userInput); userInput.value = ''"
-      class="form-control bg-transparent text-white border-none" style="padding-left: 0.5em;width: 100%;">
+    <span class="input-group-text bg-transparent text-white border-none">Path: {{currentPath}}></span><br />
+    <div class="col-md-12">
+      <div class="input-group mb-2">
+        <div class="input-group-prepend ">
+          <div class="input-group-text bg-transparent text-white border-none">>></div>
+        </div>
+        <input #userInput type="text" [id]="'text-input'+ index" autocomplete="off"
+        (keyup.enter)="submit(userInput.value, userInput); userInput.value = ''"
+        class="form-control bg-transparent text-white border-none">
+      </div>
+    </div>
   </div>
 </div>
 
-<div class="border d-flex align-items-center justify-content-center text-center"
-  style="height: 100%;background: #d3d3d3;" *ngIf="offline && !loading">
+<div class="border d-flex align-items-center justify-content-center text-center bg-white"
+  style="height: 100%;" *ngIf="offline && !loading">
   <div class="row">
-    <div class="col-md-12">Sem Conexão com a Maquina</div>
     <div class="col-md-12">
+      <img height="200" src="assets/images/noData.jpg">
+    </div>
+    <div class="col-md-12"><b>Sem Conexão com a Máquina</b></div>
+    <div class="col-md-12"><b>IP:</b> {{ip}}</div>
+    <div class="col-md-12 m-t-10">
       <button type="button" class="btn btn-primary" (click)="connect()"><i class="icofont-refresh"></i>
         Reconectar</button>
-      <button type="button" class="btn btn-primary" (click)="removeConsole()" style="margin-left: 5px;"><i
+      <button type="button" class="btn btn-danger" (click)="removeConsole()" style="margin-left: 5px;"><i
           class="icofont-trash"></i> Retirar Console</button>
     </div>
   </div>

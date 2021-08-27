@@ -16,12 +16,12 @@ export class AppComponent {
   constructor(){}
 
   calcHeight(){
-    if(this.machines.length > 1) return '43vh'
-    else return '89vh'
+    if(this.machines.length > 2) return '43vh'
+    else return '87vh'
   }
 
-  removeIp(ip){
-    this.machines = this.machines.filter(x => x.ip != ip);
+  removeConsoleByIndex(i){
+    this.machines.splice(i, 1);
   }
 
   newMachine(machine){

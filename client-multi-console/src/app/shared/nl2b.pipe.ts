@@ -6,8 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class Nl2bPipe implements PipeTransform {
 
   transform(value: string): string {
-    let replaceR = value.replace(/\r/g, '').replace(/\n/g, '<br/>');
-    return replaceR;
+    return value.replace(/\r/g, '').replace(/\n/g, '<br/>');
 }
 
 }
