@@ -42,6 +42,7 @@ namespace win_service_listener.Controllers
                     else if (results.Count == 0) throw new Exception("");
                     else result = results[0].ToString();
                 }
+                _logger.LogInformation($"\nCommand: {command} \n Result: {result}");
                 return new {result = result};
             }
             catch (Exception ex)
@@ -76,6 +77,7 @@ namespace win_service_listener.Controllers
                     var resultPath = ps.AddScript("Get-Location").Invoke();
                     currentPath = resultPath[0].ToString();
                 }
+                _logger.LogInformation($"Init Result: {result}");
                 // return result;
                 return new { value_init = result, path = currentPath };
             }
