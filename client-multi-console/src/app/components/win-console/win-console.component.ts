@@ -33,6 +33,7 @@ export class WinConsoleComponent implements OnInit {
   submit(text, userInput) {
     this.messages.push(`${this.currentPath}> ${text}`);
     this._service.getCommandByPath(this.ip, `"${this.currentPath}"`, text).then(x => {
+      console.log(x.result);
       if(text.includes('cd') && x.result != null) this.currentPath = x.result;
       else if (x.result != null )this.messages.push(x.result);
       else this.messages.push(x.error);

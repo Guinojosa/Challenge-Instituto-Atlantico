@@ -1,6 +1,7 @@
 <div class="font-monospace text-white height-full p-t-xs" (click)="setFocus()" *ngIf="!offline && !loading">
   <div class="message-container" *ngFor="let message of messages">
-    <span [innerHTML]="message | nl2b"></span>
+    <span style="white-space: break-spaces;" [innerHTML]="message | nl2b"></span>
+    <!-- <span>{{message | nl2b}}</span> -->
   </div>
   <div class="input-group input-group-sm m-t-shift">
     <span class="input-group-text bg-transparent text-white border-none">{{currentPath}}></span>

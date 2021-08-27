@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Machine } from 'src/Models/Machine';
+import { NewMachineComponent } from './components/new-machine/new-machine.component';
 
 @Component({
   selector: 'app-root',
@@ -6,14 +9,22 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  ips = ['localhost:5050']
+  @ViewChild('modalNewMachine') modalNewMachine: NewMachineComponent;
+
+  machines: Machine[] = [];
+
+  constructor(){}
 
   calcHeight(){
-    if(this.ips.length > 1) return '43vh'
+    if(this.machines.length > 1) return '43vh'
     else return '89vh'
   }
 
   removeIp(ip){
-    this.ips = this.ips.filter(x => x != ip);
+    this.machines = this.machines.filter(x => x.ip != ip);
+  }
+
+  newMachine(machine){
+    this.machines.push({name: machine.nameMachine, ip: `${machine.ip}:${machine.port}`})
   }
 }
