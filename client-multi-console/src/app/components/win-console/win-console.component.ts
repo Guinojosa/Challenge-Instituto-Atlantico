@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { WinListenerService } from 'src/app/service/win-listener.service';
 
 @Component({
@@ -6,10 +6,11 @@ import { WinListenerService } from 'src/app/service/win-listener.service';
   templateUrl: './win-console.component.html',
   styleUrls: ['./win-console.component.css']
 })
-export class WinConsoleComponent implements OnInit {
+export class WinConsoleComponent implements OnInit, OnChanges {
   @Input() ip: string;
   @Input() divScroll: any;
   @Input() index: any;
+  @Input() commandMultiple: any;
 
   @Output() removeConsoleByIndex = new EventEmitter<string>();
 
@@ -23,6 +24,14 @@ export class WinConsoleComponent implements OnInit {
 
   ngOnInit() {
     this.connect();
+  }
+
+  ngOnChanges(changes: SimpleChanges){
+    if(changes.ip == undefined) this.setCommandMultiple();
+  }
+
+  setCommandMultiple(){
+    console.log(this.commandMultiple)
   }
 
   setFocus() {

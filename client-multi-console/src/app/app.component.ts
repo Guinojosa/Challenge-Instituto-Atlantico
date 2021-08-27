@@ -12,6 +12,7 @@ export class AppComponent {
   @ViewChild('modalNewMachine') modalNewMachine: NewMachineComponent;
 
   machines: Machine[] = [];
+  commandMultiple: number = 1;
 
   constructor(){}
 
@@ -26,5 +27,9 @@ export class AppComponent {
 
   newMachine(machine){
     this.machines.push({name: machine.nameMachine, ip: `${machine.ip}:${machine.port}`});
+  }
+
+  multipleCommand(config){
+    this.commandMultiple++ ;
   }
 }

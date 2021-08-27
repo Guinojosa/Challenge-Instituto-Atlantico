@@ -15,7 +15,7 @@
             <i class="icofont-options"></i> Opções
           </a>
           <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#"><i class="icofont-chart-flow-2"></i> Multi Commando</a>
+            <a class="dropdown-item" href="javascript:void(0)" (click)="multipleCommand('aqui')"><i class="icofont-chart-flow-2"></i> Multi Commando</a>
           </div>
         </li>
       </ul>
@@ -36,7 +36,7 @@
           </div>
         </div>
         <div [ngStyle]="{'height': calcHeight()}" class="bg-dark overflow-auto" #divScroll>
-          <win-console [ip]="machine.ip" [divScroll]="divScroll" [index]="i" (removeConsoleByIndex)="removeConsoleByIndex($event)">
+          <win-console [ip]="machine.ip" [commandMultiple]="commandMultiple" [divScroll]="divScroll" [index]="i" (removeConsoleByIndex)="removeConsoleByIndex($event)">
           </win-console>
         </div>
       </div>
