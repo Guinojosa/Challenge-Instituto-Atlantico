@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 export class SwalAlertService {
 
   constructor() { }
-  
+
   toastAlert(textAlert: string, typeAlert: any) {
     const Toast = Swal.mixin({
       confirmButtonColor: '#0d6efd',
@@ -25,12 +25,10 @@ export class SwalAlertService {
   swalAlert(title: string, textAlert: string, typeAlert: any) {
     Swal.fire({
       confirmButtonColor: '#0d6efd',
-      title: title,
+      title,
       text: textAlert,
       icon: typeAlert,
-    }), function() {
-      Swal.close();
-    };
+    });
   }
 
 }

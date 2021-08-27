@@ -16,8 +16,9 @@ export class MultipleCommandComponent {
   formMultiCommand: FormGroup;
   constructor(private modalService: NgbModal, private fb: FormBuilder, private alertService: SwalAlertService) { }
   open() {
-    if (this.machines.length == 0)
-      this.alertService.swalAlert('Erro ao abrir Multiplo Comando', 'Você não possui nenhuma maquina registrada para executar essa opção.', 'error');
+    if (this.machines.length === 0) {
+      this.alertService.swalAlert('Erro ao abrir Multi Comando', 'Você não possui nenhuma maquina registrada para executar essa opção.', 'error');
+    }
     else {
       this.formMultiCommand = this.fb.group({
         machines: this.addMachinesForm(),
@@ -33,7 +34,7 @@ export class MultipleCommandComponent {
   }
 
   addMachinesForm() {
-    let machinesForm = this.fb.array([], this.multiMachineValidate());
+    const machinesForm = this.fb.array([], this.multiMachineValidate());
     this.machines.forEach((machine, index) => {
       machinesForm.push(
         this.fb.group({
@@ -41,17 +42,17 @@ export class MultipleCommandComponent {
           index: [index],
           execute: [false]
         })
-      )
+      );
     });
-    return machinesForm
+    return machinesForm;
   }
 
   multiMachineValidate(): ValidatorFn {
     return (formArray: FormArray): { [key: string]: any } | null => {
-      let valid: boolean = true;
-      valid = formArray.controls.filter(control => control.get('execute').value == true).length > 0;
-      return valid ? null : { error: 'machinesNotValid' }
-    }
+      let valid = true;
+      valid = formArray.controls.filter(control => control.get('execute').value === true).length > 0;
+      return valid ? null : { error: 'machinesNotValid' };
+    };
   }
 
 }

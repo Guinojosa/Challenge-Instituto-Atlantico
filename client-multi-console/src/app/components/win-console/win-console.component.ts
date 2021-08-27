@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { WinListenerService } from 'src/app/service/win-listener.service';
+import { textChangeRangeIsUnchanged } from 'typescript';
 
 @Component({
   selector: 'win-console',
@@ -7,7 +8,7 @@ import { WinListenerService } from 'src/app/service/win-listener.service';
   styleUrls: ['./win-console.component.css']
 })
 export class WinConsoleComponent implements OnInit, OnChanges {
-  @ViewChild('userInput') userInput: ElementRef;
+  @ViewChild('userInput') userInput: any;
   @Input() ip: string;
   @Input() divScroll: any;
   @Input() index: any;
@@ -27,15 +28,18 @@ export class WinConsoleComponent implements OnInit, OnChanges {
     this.connect();
   }
 
-  ngOnChanges(changes: SimpleChanges){
-    if(changes.ip == undefined) this.setCommandMultiple();
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.ip === undefined) { this.setCommandMultiple(); }
   }
 
-  setCommandMultiple(){
+  setCommandMultiple() {
     const command = this.commandMultiple.command;
     const execute = this.commandMultiple.machines[this.index].execute;
-    if(execute){
-      this.submit(command, this.userInput);
+    if (execute) {
+      if (this.offline) {
+        this.loading = true;
+      }
+      this.submit(command);
     }
   }
 
@@ -44,17 +48,19 @@ export class WinConsoleComponent implements OnInit, OnChanges {
     this.scrollToBottom();
   }
 
-  submit(text, userInput) {
-    userInput.disabled = true;
+  submit(text) {
+    this.disableInput(true);
     this.messages.push(`${this.currentPath}> ${text}`);
     this.service.getCommandByPath(this.ip, `"${this.currentPath}"`, text).then(x => {
-      userInput.disabled = false;
+      this.disableInput(false);
       if (text.includes('cd') && x.result != null) { this.currentPath = x.result; }
       else if (x.result != null) { this.messages.push(x.result); }
       else { this.messages.push(x.error); }
       this.scrollToBottom();
       this.setFocus();
-    }).catch(() => { userInput.disabled = false, this.offline = true; });
+      this.loading = false;
+      this.offline = false;
+    }).catch(() => { this.disableInput(false), this.offline = true, this.loading = false; });
   }
 
   connect() {
@@ -68,6 +74,12 @@ export class WinConsoleComponent implements OnInit, OnChanges {
       this.loading = false;
       this.offline = false;
     }).catch(() => { this.offline = true, this.loading = false; });
+  }
+
+  disableInput(bool) {
+    if (this.userInput !== undefined) {
+      this.userInput.disabled = bool;
+    }
   }
 
   removeConsole() {

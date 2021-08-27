@@ -10,7 +10,7 @@
           <div class="input-group-text bg-transparent text-white border-none">>></div>
         </div>
         <input #userInput type="text" [id]="'text-input'+ index" autocomplete="off"
-        (keyup.enter)="submit(userInput.value, userInput); userInput.value = ''"
+        (keyup.enter)="submit(userInput.value); userInput.value = ''"
         class="form-control bg-transparent text-white border-none">
       </div>
     </div>
