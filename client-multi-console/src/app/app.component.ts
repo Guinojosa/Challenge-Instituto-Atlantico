@@ -16,8 +16,8 @@ export class AppComponent {
   constructor(){}
 
   calcHeight(){
-    if(this.machines.length > 2) return '43vh'
-    else return '87vh'
+    if (this.machines.length > 2) { return '43vh'; }
+    else { return '87vh'; }
   }
 
   removeConsoleByIndex(i){
@@ -25,6 +25,6 @@ export class AppComponent {
   }
 
   newMachine(machine){
-    this.machines.push({name: machine.nameMachine, ip: `${machine.ip}:${machine.port}`})
+    this.machines.push({name: machine.nameMachine, ip: `${machine.ip}:${machine.port}`});
   }
 }

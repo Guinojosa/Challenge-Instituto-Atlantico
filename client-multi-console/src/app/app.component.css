@@ -1,0 +1,10 @@
+.content-consoles{
+    max-height: 94vh;
+    overflow: auto;
+    overflow-y: scroll;
+    width: 100.8%;
+}
+
+.content-welcome{
+    width: 98.8%;
+}

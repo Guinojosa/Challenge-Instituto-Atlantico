@@ -13,13 +13,13 @@ export class WinConsoleComponent implements OnInit {
 
   @Output() removeConsoleByIndex = new EventEmitter<string>();
 
-  offline: boolean = false;
-  loading: boolean = true;
+  offline = false;
+  loading = true;
 
   messages: string[] = [];
-  currentPath: string = '';
+  currentPath = '';
 
-  constructor(private _service: WinListenerService){}
+  constructor(private service: WinListenerService){}
 
   ngOnInit() {
     this.connect();
@@ -33,25 +33,25 @@ export class WinConsoleComponent implements OnInit {
   submit(text, userInput) {
     userInput.disabled = true;
     this.messages.push(`${this.currentPath}> ${text}`);
-    this._service.getCommandByPath(this.ip, `"${this.currentPath}"`, text).then(x => {
+    this.service.getCommandByPath(this.ip, `"${this.currentPath}"`, text).then(x => {
       userInput.disabled = false;
-      if(text.includes('cd') && x.result != null) this.currentPath = x.result;
-      else if (x.result != null )this.messages.push(x.result);
-      else this.messages.push(x.error);
+      if (text.includes('cd') && x.result != null) { this.currentPath = x.result; }
+      else if (x.result != null ) {this.messages.push(x.result); }
+      else { this.messages.push(x.error); }
       this.scrollToBottom();
-    }).catch(() => { userInput.disabled = false, this.offline = true});
+    }).catch(() => { userInput.disabled = false, this.offline = true; });
   }
 
   connect(){
     this.loading = true;
     this.messages = [];
-    this._service.getInit(this.ip).then(x => {
+    this.service.getInit(this.ip).then(x => {
       this.messages.push(x.value_init);
       this.currentPath = x.path;
       this.scrollToBottom();
       this.loading = false;
-      this.offline = false; 
-    }).catch(() => {this.offline = true, this.loading = false});
+      this.offline = false;
+    }).catch(() => {this.offline = true, this.loading = false; });
   }
 
   removeConsole(){
