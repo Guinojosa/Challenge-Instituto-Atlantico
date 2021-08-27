@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "3kJiNDB/Y0TdJ0EeJbCrlKHeKQJtHRdIREWpc879MQVrYr4DevFxc9Vb+qTbxajdX3VvNkeIQRxQtuxLINnzxw==",
+  "dgSpecHash": "b51gPqJ75KI4EAeGeM2coP7H3mMeiwvRclnsgvvkODALO1Fr0w0Khuo6KOsI+Fihkq9dLek/5mhYbvu2paGrig==",
   "success": true,
   "projectFilePath": "C:\\Users\\guilh\\Documents\\Projetos\\Instituto Atlantico\\csharp-challenge-guilherme-nojosa\\win-service-listener\\win-service-listener.csproj",
   "expectedPackageFiles": [
@@ -63,6 +63,9 @@
     "C:\\Users\\guilh\\.nuget\\packages\\namotion.reflection\\1.0.14\\namotion.reflection.1.0.14.nupkg.sha512",
     "C:\\Users\\guilh\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
     "C:\\Users\\guilh\\.nuget\\packages\\njsonschema\\10.2.2\\njsonschema.10.2.2.nupkg.sha512",
+    "C:\\Users\\guilh\\.nuget\\packages\\nlog\\4.7.10\\nlog.4.7.10.nupkg.sha512",
+    "C:\\Users\\guilh\\.nuget\\packages\\nlog.extensions.logging\\1.7.3\\nlog.extensions.logging.1.7.3.nupkg.sha512",
+    "C:\\Users\\guilh\\.nuget\\packages\\nlog.web.aspnetcore\\4.13.0\\nlog.web.aspnetcore.4.13.0.nupkg.sha512",
     "C:\\Users\\guilh\\.nuget\\packages\\runtime.linux-arm.runtime.native.system.io.ports\\5.0.0-rtm.20519.4\\runtime.linux-arm.runtime.native.system.io.ports.5.0.0-rtm.20519.4.nupkg.sha512",
     "C:\\Users\\guilh\\.nuget\\packages\\runtime.linux-arm64.runtime.native.system.io.ports\\5.0.0-rtm.20519.4\\runtime.linux-arm64.runtime.native.system.io.ports.5.0.0-rtm.20519.4.nupkg.sha512",
     "C:\\Users\\guilh\\.nuget\\packages\\runtime.linux-x64.runtime.native.system.io.ports\\5.0.0-rtm.20519.4\\runtime.linux-x64.runtime.native.system.io.ports.5.0.0-rtm.20519.4.nupkg.sha512",
