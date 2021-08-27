@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Machine } from 'src/Models/Machine';
+import { MultipleCommandComponent } from './components/multiple-command/multiple-command.component';
 import { NewMachineComponent } from './components/new-machine/new-machine.component';
 
 @Component({
@@ -10,9 +11,10 @@ import { NewMachineComponent } from './components/new-machine/new-machine.compon
 })
 export class AppComponent {
   @ViewChild('modalNewMachine') modalNewMachine: NewMachineComponent;
+  @ViewChild('modalMultiCommand') modalMultiCommand: MultipleCommandComponent;
 
   machines: Machine[] = [];
-  commandMultiple: number = 1;
+  commandMultiple: any;
 
   constructor(){}
 
@@ -30,6 +32,6 @@ export class AppComponent {
   }
 
   multipleCommand(config){
-    this.commandMultiple++ ;
+    this.commandMultiple = config;
   }
 }

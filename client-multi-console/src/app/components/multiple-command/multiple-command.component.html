@@ -1,0 +1,43 @@
+<ng-template #contentMultiCommand let-modal>
+    <form [formGroup]="formMultiCommand" #ngForm="ngForm" (ngSubmit)="ngForm.form.valid && submitMultiCommand()"
+        novalidate>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Multi Commando</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <label><b>Selecione as máquinas que iram executar</b></label>
+            <div class="row">
+                <div class="col-md-12" formArrayName="machines"
+                    *ngFor="let machine of formMultiCommand.get('machines').controls; let i = index">
+                    <div class="form-check form-switch" formGroupName="{{i}}">
+                        <input class="form-check-input" type="checkbox" name="execute" [id]="'execute' + i"
+                            formControlName="execute">
+                        <label class="form-check-label"
+                            for="flexSwitchCheckDefault">{{machine.get('name').value}}</label>
+                    </div>
+                </div>
+            </div>
+            <div style=" color:red" *ngIf="ngForm.submitted && formMultiCommand.get('machines')?.errors">
+                <p *ngIf="formMultiCommand.get('machines').errors != null">É necessário pelo menos uma máquina para
+                    executar o comando
+                </p>
+            </div>
+            <div class="form-group">
+                <label for="command"><b>Comando</b></label>
+                <div class="input-group">
+                    <input type="text" id="command" class="form-control" placeholder="get-psdrive" name="command"
+                        formControlName="command">
+                </div>
+                <div class="messages text-danger" *ngIf="ngForm.submitted && formMultiCommand.get('command').errors">
+                    Comando é obrigatório
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-outline-dark">Executar</button>
+        </div>
+    </form>
+</ng-template>

@@ -8,13 +8,15 @@ import { Nl2bPipe } from './shared/nl2b.pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NewMachineComponent } from './components/new-machine/new-machine.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MultipleCommandComponent } from './components/multiple-command/multiple-command.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     WinConsoleComponent,
     Nl2bPipe,
-    NewMachineComponent
+    NewMachineComponent,
+    MultipleCommandComponent
   ],
   imports: [
     BrowserModule,

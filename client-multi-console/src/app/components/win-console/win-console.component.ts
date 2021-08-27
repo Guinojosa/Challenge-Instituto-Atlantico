@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { WinListenerService } from 'src/app/service/win-listener.service';
 
 @Component({
@@ -7,6 +7,7 @@ import { WinListenerService } from 'src/app/service/win-listener.service';
   styleUrls: ['./win-console.component.css']
 })
 export class WinConsoleComponent implements OnInit, OnChanges {
+  @ViewChild('userInput') userInput: ElementRef;
   @Input() ip: string;
   @Input() divScroll: any;
   @Input() index: any;
@@ -31,7 +32,11 @@ export class WinConsoleComponent implements OnInit, OnChanges {
   }
 
   setCommandMultiple(){
-    console.log(this.commandMultiple)
+    const command = this.commandMultiple.command;
+    const execute = this.commandMultiple.machines[this.index].execute;
+    if(execute){
+      this.submit(command, this.userInput);
+    }
   }
 
   setFocus() {

@@ -15,7 +15,7 @@
             <i class="icofont-options"></i> Opções
           </a>
           <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="javascript:void(0)" (click)="multipleCommand('aqui')"><i class="icofont-chart-flow-2"></i> Multi Commando</a>
+            <a class="dropdown-item" href="javascript:void(0)" (click)="modalMultiCommand.open()"><i class="icofont-chart-flow-2"></i> Multi Commando</a>
           </div>
         </li>
       </ul>
@@ -62,3 +62,4 @@
 </ng-container>
 
 <new-machine #modalNewMachine (newMachineOut)="newMachine($event)"></new-machine>
+<multiple-command #modalMultiCommand [machines]="machines" (newMultiCommand)="multipleCommand($event)"></multiple-command>
