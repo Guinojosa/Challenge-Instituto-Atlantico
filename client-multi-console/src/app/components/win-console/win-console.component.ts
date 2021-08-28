@@ -66,7 +66,7 @@ export class WinConsoleComponent implements OnInit, OnChanges {
   connect() {
     this.loading = true;
     this.messages = [];
-    this.service.getInit(this.ip).then(x => {
+    this.service.getServerInfo(this.ip).then(x => {
       this.messages.push(x.value_init);
       this.currentPath = x.path;
       this.scrollToBottom();

@@ -8,8 +8,8 @@ export class WinListenerService {
 
   constructor(private http: HttpClient) { }
 
-  getInit(ip): Promise<any>{
-    const url = `http://${ip}/Commands/Init`;
+  getServerInfo(ip): Promise<any>{
+    const url = `http://${ip}/Commands/GetServerInfo`;
     return this.http.get<any>(url)
     .toPromise()
     .then(res => res)
