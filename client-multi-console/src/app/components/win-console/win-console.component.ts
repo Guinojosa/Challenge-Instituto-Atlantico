@@ -39,7 +39,7 @@ export class WinConsoleComponent implements OnInit, OnChanges {
       if (this.offline) {
         this.loading = true;
       }
-      this.submit(command);
+      this.command(command);
     }
   }
 
@@ -48,7 +48,7 @@ export class WinConsoleComponent implements OnInit, OnChanges {
     this.scrollToBottom();
   }
 
-  submit(text) {
+  command(text) {
     this.disableInput(true);
     this.messages.push(`${this.currentPath}> ${text}`);
     this.service.getCommandByPath(this.ip, `"${this.currentPath}"`, text).then(x => {

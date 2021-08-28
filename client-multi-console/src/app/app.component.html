@@ -61,5 +61,5 @@
   </div>
 </ng-container>
 
-<new-machine #modalNewMachine (newMachineOut)="newMachine($event)"></new-machine>
+<new-machine #modalNewMachine [machines]="machines" (newMachineOut)="newMachine($event)"></new-machine>
 <multiple-command #modalMultiCommand [machines]="machines" (newMultiCommand)="multipleCommand($event)"></multiple-command>

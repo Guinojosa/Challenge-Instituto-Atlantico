@@ -15,7 +15,12 @@
                         formControlName="nameMachine">
                 </div>
                 <div class="messages text-danger" *ngIf="ngForm.submitted && formMachine.get('nameMachine').errors">
-                    Nome inválido
+                    <ng-container *ngIf="formMachine.get('nameMachine').errors?.required">
+                        Nome é obrigatório
+                    </ng-container>
+                    <ng-container *ngIf="formMachine.get('nameMachine').errors?.nameExistValid">
+                        Já foi cadastrada uma máquina com esse nome
+                    </ng-container>
                 </div>
             </div>
             <div class="row">

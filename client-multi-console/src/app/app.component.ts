@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Machine } from 'src/Models/Machine';
 import { MultipleCommandComponent } from './components/multiple-command/multiple-command.component';
@@ -9,7 +9,7 @@ import { NewMachineComponent } from './components/new-machine/new-machine.compon
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   @ViewChild('modalNewMachine') modalNewMachine: NewMachineComponent;
   @ViewChild('modalMultiCommand') modalMultiCommand: MultipleCommandComponent;
 
@@ -17,6 +17,10 @@ export class AppComponent {
   commandMultiple: any;
 
   constructor(){}
+
+  ngOnInit(){
+    console.log('teste');
+  }
 
   calcHeight(){
     if (this.machines.length > 2) { return '43vh'; }

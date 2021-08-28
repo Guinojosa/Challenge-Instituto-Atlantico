@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, ValidatorFn, FormArray } from '@angular/forms';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SwalAlertService } from 'src/app/shared/Alerts/swal-alert.service';
+import { MultipleCommandValidator } from 'src/app/shared/Validators/multiple-command.validator';
 import { Machine } from 'src/Models/Machine';
 
 @Component({
@@ -34,7 +35,7 @@ export class MultipleCommandComponent {
   }
 
   addMachinesForm() {
-    const machinesForm = this.fb.array([], this.multiMachineValidate());
+    const machinesForm = this.fb.array([], MultipleCommandValidator.multiMachineValidate);
     this.machines.forEach((machine, index) => {
       machinesForm.push(
         this.fb.group({
@@ -45,14 +46,6 @@ export class MultipleCommandComponent {
       );
     });
     return machinesForm;
-  }
-
-  multiMachineValidate(): ValidatorFn {
-    return (formArray: FormArray): { [key: string]: any } | null => {
-      let valid = true;
-      valid = formArray.controls.filter(control => control.get('execute').value === true).length > 0;
-      return valid ? null : { error: 'machinesNotValid' };
-    };
   }
 
 }
