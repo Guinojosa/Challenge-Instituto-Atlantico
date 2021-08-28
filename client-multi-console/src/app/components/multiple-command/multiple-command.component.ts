@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, FormArray } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { SwalAlertService } from 'src/app/shared/swal-alert.service';
+import { SwalAlertService } from 'src/app/shared/Alerts/swal-alert.service';
 import { Machine } from 'src/Models/Machine';
 
 @Component({
