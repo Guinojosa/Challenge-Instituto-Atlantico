@@ -29,7 +29,7 @@ namespace win_service_listener.Infra
             this.AntiVirus = PowerShellService.ExecuteCommandbyPath("","Get-CimInstance -Namespace root/SecurityCenter2 -ClassName AntivirusProduct | Select displayName ");
             this.DotnetVersion = PowerShellService.ExecuteCommandbyPath("","dotnet --version");
             this.HdState = PowerShellService.ExecuteCommandbyPath("","Get-PSDrive | Select-Object Name, @{ E={\"$([math]::round($_.Used/1GB,2))\"}; L='Used' }, @{ E={\"$([math]::round($_.Free/1GB,2))\"}; L='Free' } | where {($_.Used -notlike 0)}");
-            this.CurrentPath = PowerShellService.ExecuteCommandbyPath("","Get-Location");
+            this.CurrentPath = PowerShellService.ExecuteCommandbyPath("","Get-Location", false);
         }
 
         public string OutStringOBJ() {
