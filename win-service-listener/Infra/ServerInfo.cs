@@ -7,7 +7,7 @@ namespace win_service_listener.Infra
 {
     public class ServerInfo
     {
-        #region Properties Init
+        #region Properties Server Info
         public string Hostname { get; set; }
         public string AddresIp { get; set; }
         public string FirewallStatus { get; set; }
@@ -19,9 +19,9 @@ namespace win_service_listener.Infra
         #endregion
 
         #region builders
-        public ServerInfo() => SetValuesInit();
+        public ServerInfo() => SetValuesServerInfo();
 
-        protected void SetValuesInit(){
+        protected void SetValuesServerInfo(){
             this.Hostname = PowerShellService.ExecuteCommandbyPath("","hostname");
             this.AddresIp = PowerShellService.ExecuteCommandbyPath("","ipconfig | findstr /i \"ipv4\"");
             this.FirewallStatus = PowerShellService.ExecuteCommandbyPath("","netsh advfirewall show currentprofile state");
