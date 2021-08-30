@@ -1,0 +1,57 @@
+<ng-template #contentNewMachine let-modal>
+    <form [formGroup]="formMachine"  #ngForm="ngForm" (ngSubmit)="ngForm.form.valid && newMachine()" novalidate>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Nova Máquina</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">      
+            <p id="modal-basic-title"><b>OBS:</b> Certifique-se que a máquina teve o serviço instalado.</p>
+            <div class="form-group">
+                <label for="nameMachine"><b>Nome</b></label>
+                <div class="input-group">
+                    <input type="text" id="nameMachine" class="form-control" placeholder="Máquina 1" name="nameMachine"
+                        formControlName="nameMachine">
+                </div>
+                <div class="messages text-danger" *ngIf="ngForm.submitted && formMachine.get('nameMachine').errors">
+                    <ng-container *ngIf="formMachine.get('nameMachine').errors?.required">
+                        Nome é obrigatório
+                    </ng-container>
+                    <ng-container *ngIf="formMachine.get('nameMachine').errors?.nameExistValid">
+                        Já foi cadastrada uma máquina com esse nome
+                    </ng-container>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="ip"><b>IP</b></label>
+                        <div class="input-group">
+                            <input type="text" id="ip" class="form-control" placeholder="xxx.xxx.xxxx.xx" name="ip"
+                                formControlName="ip">
+                        </div>
+                        <div class="messages text-danger" *ngIf="ngForm.submitted && formMachine.get('ip').errors">
+                            IP inválido
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="port"><b>Porta</b></label>
+                        <div class="input-group">
+                            <input type="number" id="port" class="form-control" placeholder="5050" name="port"
+                                formControlName="port">
+                        </div>
+                        <div class="messages text-danger" *ngIf="ngForm.submitted && formMachine.get('port').errors">
+                            Porta inválido
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-outline-dark">Registrar</button>
+        </div>
+    </form>
+</ng-template>

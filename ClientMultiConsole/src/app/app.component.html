@@ -1,0 +1,65 @@
+<nav class="navbar fixed-bottom navbar-light bg-faded justify-content-between navbar-dark bg-really-dark flex-nowrap flex-row">
+  <div class="container">
+    <a href="javascript:void(0)" class="navbar-brand float-left" title="Battle Royalle Solutions">B|R|S</a>
+    <ul class="nav navbar-nav flex-row">
+      <li class="nav-item active mr-5">
+        <a class="nav-link" href="javascript:void(0)" (click)="modalNewMachine.open()"><i class="icofont-plus"></i> Nova
+          Máquina</a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav flex-row float-right">
+      <ul class="nav navbar-nav flex-row float-right">
+        <li ngbDropdown class="nav-item dropdown" display="dynamic">
+          <a ngbDropdownToggle class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdownMenuLink"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="icofont-options"></i> Opções
+          </a>
+          <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="javascript:void(0)" (click)="modalMultiCommand.open()"><i class="icofont-chart-flow-2"></i> Multi Commando</a>
+          </div>
+        </li>
+      </ul>
+    </ul>
+  </div>
+</nav>
+<ng-container *ngIf="machines.length > 0">
+  <div class="row content-consoles">
+    <ng-container *ngFor="let machine of machines;let i = index">
+      <div [ngClass]="machines.length > 1 ? 'col-md-6' : 'col-md-12'" style="padding: 0px">
+        <div class="text-center bg-dark">
+          <div ngbDropdown class="d-inline-block w-25" placement="bottom">
+            <button class="btn btn-primary w-100" ngbDropdownToggle>{{machine.name}}</button>
+            <div ngbDropdownMenu>
+              <button ngbDropdownItem (click)="removeConsoleByIndex(i)"><i class="icofont-trash"></i> Retirar
+                Console</button>
+            </div>
+          </div>
+        </div>
+        <div [ngStyle]="{'height': calcHeight()}" class="bg-dark overflow-auto" #divScroll>
+          <win-console [ip]="machine.ip" [commandMultiple]="commandMultiple" [divScroll]="divScroll" [index]="i" (removeConsoleByIndex)="removeConsoleByIndex($event)">
+          </win-console>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="machines.length == 0">
+  <div class="d-flex align-items-center justify-content-center text-center content-welcome">
+    <div class="row">
+      <div class="col-md-12">
+        <img height="700" src="assets/images/home.jpg">
+      </div>
+      <div class="col-md-12 ">
+        <p class="p-welcome text-white">Ferramenta para uso de máquinas Windows via CLI.
+        Para iniciar, basta registrar as máquinas.</p>
+      </div>
+      <div class="col-md-12">
+        <i class="icofont-arrow-down" style="font-size: 37px"></i>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<new-machine #modalNewMachine [machines]="machines" (newMachineOut)="newMachine($event)"></new-machine>
+<multiple-command #modalMultiCommand [machines]="machines" (newMultiCommand)="multipleCommand($event)"></multiple-command>
