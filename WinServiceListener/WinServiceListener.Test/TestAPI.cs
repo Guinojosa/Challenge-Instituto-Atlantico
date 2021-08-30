@@ -5,13 +5,14 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Linq;
 using WinServiceListener.API.Controllers;
 using WinServiceListener.API.Infra;
 
 namespace WinServiceLisstener.Test
 {
     [TestClass]
-    public class UnitTest1
+    public class TestAPI
     {
         [TestMethod]
         public void TestServerInfo()
@@ -19,7 +20,7 @@ namespace WinServiceLisstener.Test
             ILogger<CommandsController> logger = new Logger<CommandsController>(new NullLoggerFactory());
             CommandsController commandController = new CommandsController(logger);
             ObjReturn serverInfo = commandController.GetServerInfo();
-            Assert.IsTrue(!String.IsNullOrEmpty(serverInfo.serverInfo));
+            Assert.IsTrue(!String.IsNullOrEmpty(serverInfo.ServerInfo));
         }
 
         [TestMethod]
@@ -28,8 +29,9 @@ namespace WinServiceLisstener.Test
             ILogger<CommandsController> logger = new Logger<CommandsController>(new NullLoggerFactory());
             CommandsController commandController = new CommandsController(logger);
             ObjReturn serverInfo = commandController.GetServerInfo();
-            ObjReturn commandByPath = commandController.GetCommandByPath(serverInfo.severPath, "CommandNotValid");
-            Assert.IsTrue(!String.IsNullOrEmpty(commandByPath.error));
+            ObjReturn commandByPath = commandController.GetCommandByPath(serverInfo.SeverPath, "CommandNotValid");
+            Assert.IsTrue(!String.IsNullOrEmpty(commandByPath.Error));
         }
+
     }
 }

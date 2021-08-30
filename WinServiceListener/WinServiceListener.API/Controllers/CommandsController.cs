@@ -32,11 +32,11 @@ namespace WinServiceListener.API.Controllers
                 string psresult = PowerShellService.ExecuteCommandbyPath(path, command);
                 string messagelog = $"\nCommand: {command} \n Result: {psresult}";
                 _logger.LogInformation(message: messagelog);
-                return new ObjReturn { result = psresult };
+                return new ObjReturn { Result = psresult };
             }
             catch (Exception ex)
             {
-                return new ObjReturn { error = ex.Message};
+                return new ObjReturn { Error = ex.Message};
             }
         }
 
@@ -47,11 +47,11 @@ namespace WinServiceListener.API.Controllers
             {
                 ServerInfo serverInfo = new ServerInfo();
                 _logger.LogInformation($"Init Result: {serverInfo.OutStringOBJ()}");
-                return new ObjReturn { serverInfo = serverInfo.OutStringOBJ(), severPath = serverInfo.CurrentPath };
+                return new ObjReturn { ServerInfo = serverInfo.OutStringOBJ(), SeverPath = serverInfo.CurrentPath };
             }
             catch (Exception ex)
             {
-                return new ObjReturn { error = ex.Message};
+                return new ObjReturn { Error = ex.Message};
             }
         }
     }
