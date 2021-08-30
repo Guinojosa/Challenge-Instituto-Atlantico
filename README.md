@@ -37,3 +37,11 @@ Os seguintes pontos serão considerados para uma boa avaliação do seu projeto.
 - Uso de testes unitários
 - Utilização de tecnologias recentes, bem como a versão mais nova do C# / .NET Core 3.1
 - Utilização de recursos de integração com GitHub.
+
+# Solução
+
+- A Aplicação web esta em angular v11 utilizando bootstrap. Para rodar localmente basta:
+  . Executar npm install.
+  . Executar ng serve.
+- Para publicar é necessário somente executar o comando 'ng build --prod' e pegar os arquivos no dist.
+- A Aplicação cliente é uma api em .NET core 3.1 exposta como serviço windows. Para publicar basta gerar o publish do projeto e executar o "InstallService.bat" como privilegios administrativos. 
