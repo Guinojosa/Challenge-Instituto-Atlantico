@@ -19,7 +19,7 @@ export class AppComponent implements OnInit{
   constructor(){}
 
   ngOnInit(){
-    console.log('teste');
+    this.getStartMachines();
   }
 
   calcHeight(){
@@ -29,13 +29,20 @@ export class AppComponent implements OnInit{
 
   removeConsoleByIndex(i){
     this.machines.splice(i, 1);
+    localStorage.setItem('machines', JSON.stringify(this.machines));
   }
 
   newMachine(machine){
     this.machines.push({name: machine.nameMachine, ip: `${machine.ip}:${machine.port}`});
+    localStorage.setItem('machines', JSON.stringify(this.machines));
   }
 
   multipleCommand(config){
     this.commandMultiple = config;
+  }
+
+  getStartMachines(){
+    const localMachines = localStorage.getItem('machines');
+    if (localMachines !== undefined) { this.machines = JSON.parse(localMachines); }
   }
 }

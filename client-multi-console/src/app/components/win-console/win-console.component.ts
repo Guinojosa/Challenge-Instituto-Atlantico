@@ -67,8 +67,8 @@ export class WinConsoleComponent implements OnInit, OnChanges {
     this.loading = true;
     this.messages = [];
     this.service.getServerInfo(this.ip).then(x => {
-      this.messages.push(x.value_init);
-      this.currentPath = x.path;
+      this.messages.push(x.serverInfo);
+      this.currentPath = x.severPath;
       this.scrollToBottom();
       this.setToFocus();
       this.loading = false;
